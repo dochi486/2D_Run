@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     Animator animator;
     Rigidbody2D rigid;
     public Vector2 jumpForce = new Vector2(0, 1000);
-    public float gravityScale =7;
-
+    public float gravityScale = 7;
+    public Transform rayStart;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +15,7 @@ public class Player : MonoBehaviour
 
         rigid = GetComponent<Rigidbody2D>();
         rigid.gravityScale = gravityScale;
-        rayStart = transform;
-        groundLayer = 1 << LayerMask.NameToLayer("Ground");
+
 
         animator.Play("Run");
 
@@ -33,7 +29,7 @@ public class Player : MonoBehaviour
     {
         transform.Translate(speed * Time.deltaTime, 0, 0);
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             rigid.AddForce(jumpForce);
             //if(rigid.velocity.y > 10)
@@ -42,7 +38,7 @@ public class Player : MonoBehaviour
             //} 안된다ㅠㅠ
         }
         float velocity = rigid.velocity.y;
-        float absVelocity =Mathf.Abs(velocity);
+        float absVelocity = Mathf.Abs(velocity);
         string animationName = "";
         //string animationName = string.Empty; <-이걸 더 자주 쓴다
 
@@ -70,13 +66,13 @@ public class Player : MonoBehaviour
         animator.Play(animationName);
 
     }
-    public Transform rayStart;
+
     public float rayCheckDistance = 0.1f;
     public LayerMask groundLayer;
     private bool IsGround()
     {
-        var hit = Physics2D.Raycast(rayStart.position, Vector2.down,rayCheckDistance,groundLayer );
-        return hit.transform ;
+        var hit = Physics2D.Raycast(rayStart.position, Vector2.down, rayCheckDistance, groundLayer);
+        return hit.transform != null;
     }
     private void OnDrawGizmos()
     {
