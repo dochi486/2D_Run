@@ -9,7 +9,7 @@ public class RunGameManager : MonoBehaviour
     public static RunGameManager instance;
     TextMeshProUGUI timeText;
     public int waitSeconds = 3;
-    public GameStateType gameStateType = GameStateType.NotInit;
+        public GameStateType gameStateType = GameStateType.NotInit;
 
 
     internal void StageClear()
@@ -80,6 +80,5 @@ public class RunGameManager : MonoBehaviour
         Clear
     }
 
-    // Update is called once per frame
 
 }

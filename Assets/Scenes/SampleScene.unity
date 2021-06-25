@@ -2164,8 +2164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitSeconds: 3
-  point: 0
   gameStateType: 0
+  point: 0
 --- !u!1 &1107919233
 GameObject:
   m_ObjectHideFlags: 0
@@ -5810,7 +5810,7 @@ GameObject:
   - component: {fileID: 1604523039}
   - component: {fileID: 1604523038}
   m_Layer: 0
-  m_Name: MonedaD_0
+  m_Name: FinishFlag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

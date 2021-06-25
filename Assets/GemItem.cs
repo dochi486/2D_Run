@@ -10,7 +10,6 @@ public class GemItem : MonoBehaviour
 
         //collision.transform.CompareTag("Player");
 
-
         if (isUse)
             return;
 
