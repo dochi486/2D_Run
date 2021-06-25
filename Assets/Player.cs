@@ -32,11 +32,25 @@ public class Player : MonoBehaviour
 
         rigid = GetComponent<Rigidbody2D>();
         rigid.gravityScale = gravityScale;
+        cameraTr = Camera.main.transform;
         //rayStart = transform;
-
+        offsetXCameraPos = cameraTr.position.x - transform.position.x;
         //animator.Play("Run"); Idle로 시작하는 게 자연스러우니까!
 
 
+    }
+
+    public Transform cameraTr;
+    public float offsetXCameraPos; //카메라랑 플레이어의 X값 차이 내 프로젝트에서는 -5! 
+    public float allowedOffsetX = 0.2f;
+    public float restoreSpeed = 40;
+    private void RestoreXPosition()
+    {
+        float offsetX = cameraTr.position.x - transform.position.x;
+        if(offsetX > offsetXCameraPos + allowedOffsetX)
+        {
+            transform.Translate(restoreSpeed * Time.deltaTime, 0, 0);
+        }
     }
 
     public float speed = 20;
@@ -45,6 +59,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    transform.Find("MagneticEffect").gameObject.SetActive(true);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    transform.Find("MagneticEffect").gameObject.SetActive(false);
+        //}
+
+
+
         if (RunGameManager.IsPlaying() == false)
             return;
         transform.Translate(speed * Time.deltaTime, 0, 0);
@@ -85,7 +110,11 @@ public class Player : MonoBehaviour
 
         animator.Play(animationName);
 
+
+        RestoreXPosition();
+
     }
+
 
     public float rayCheckDistance = 0.1f;
     public LayerMask groundLayer;
