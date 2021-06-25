@@ -9,6 +9,8 @@ public class RunGameManager : MonoBehaviour
     public static RunGameManager instance;
     TextMeshProUGUI timeText;
     public int waitSeconds = 3;
+    public GameStateType gameStateType = GameStateType.NotInit;
+
 
     internal void StageClear()
     {
@@ -68,7 +70,6 @@ public class RunGameManager : MonoBehaviour
     //게임이 시작되었는지 멈춘 중인지 판단하여 상태로 동작하게 
     //문자만 있는 상태를 지정할 땐 항상 enum으롱
 
-    public GameStateType gameStateType = GameStateType.NotInit;
 
 
     public enum GameStateType
@@ -80,8 +81,5 @@ public class RunGameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
