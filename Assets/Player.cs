@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 
         rigid = GetComponent<Rigidbody2D>();
         rigid.gravityScale = gravityScale;
-
+        //rayStart = transform;
 
         animator.Play("Run");
 
