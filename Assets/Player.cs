@@ -1,15 +1,32 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance;
+    //RunGameManager runGameManager; //싱글톤 안했을 때 사용하는 방법
     Animator animator;
     Rigidbody2D rigid;
     public Vector2 jumpForce = new Vector2(0, 1000);
     public float gravityScale = 7;
     public Transform rayStart;
+
+    internal void OnStageClear()
+    {
+        animator.Play("Idle");
+    }
+
     // Start is called before the first frame update
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
+        //runGameManager = GameObject.Find("Canvas").GetComponent<RunGameManager>(); //싱글톤 안했을 때 사용하는 방법
+        //runGameManager = FindObjectOfType<RunGameManager>(); //씬에 있는 모든 오브젝트에서 런게임매니저를 찾는 코드
+        //runGameManager = RunGameManager.instance; //찾는 과정 없이 바로 인스턴스에 있는 것을 할당하는 것(싱글톤)
+
         animator = transform.Find("Sprite").GetComponent<Animator>();
         //animator = GetComponentInChildren<Animator>();
 
@@ -17,7 +34,8 @@ public class Player : MonoBehaviour
         rigid.gravityScale = gravityScale;
         //rayStart = transform;
 
-        animator.Play("Run");
+        //animator.Play("Run"); Idle로 시작하는 게 자연스러우니까!
+
 
     }
 
@@ -27,6 +45,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (RunGameManager.IsPlaying() == false)
+            return;
         transform.Translate(speed * Time.deltaTime, 0, 0);
 
         if (Input.GetKeyDown(KeyCode.Space))
