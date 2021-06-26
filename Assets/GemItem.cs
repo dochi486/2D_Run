@@ -13,7 +13,7 @@ public class GemItem : MonoBehaviour
         if (isUse)
             return;
 
-        if (collision.transform.GetComponentInParent<Player>() == null)
+        if (collision.transform.GetComponent<Player>() == null)
             return;
 
         isUse = true;
