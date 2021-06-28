@@ -54,9 +54,17 @@ public class Player : MonoBehaviour
         }
         Attack();
         UpdateSprite(); //애니메이션
-
+        //dochi.dochiAge = 4;
     }
     StateType state = StateType.IdleOrRunOrJump;
+    //public class Hedgehogs
+    //{
+    //    public string dochiName;
+    //    public float dochiAge;
+    //}
+
+    //Hedgehogs dochi;
+
 
     [System.Serializable]
     public class AttackInfo
