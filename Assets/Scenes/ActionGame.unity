@@ -3546,6 +3546,42 @@ PrefabInstance:
       propertyPath: gravityScale
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
+      propertyPath: attacks.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
+      propertyPath: attacks.Array.data[0].clipName
+      value: Punch
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
+      propertyPath: attacks.Array.data[0].dashTime
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
+      propertyPath: attacks.Array.data[1].clipName
+      value: Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
+      propertyPath: attacks.Array.data[1].dashTime
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
+      propertyPath: attacks.Array.data[0].dashSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
+      propertyPath: attacks.Array.data[1].dashSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
+      propertyPath: attacks.Array.data[0].animationTime
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
+      propertyPath: attacks.Array.data[1].animationTime
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 5179449540401348513, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
       propertyPath: m_Name
       value: Player

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,8 +47,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Jump();
+        if (state != StateType.Attack)
+        {
+            Move();
+            Jump();
+        }
         Attack();
         UpdateSprite(); //애니메이션
 
@@ -61,34 +63,56 @@ public class Player : MonoBehaviour
     {
         public string clipName;
         public float animationTime; //0.6f
+        public float dashSpeed;
+        public float dashTime;
     }
     public List<AttackInfo> attacks;
     public enum StateType
     {
-        Attack, 
+        Attack,
         IdleOrRunOrJump,
 
     }
-
+    Coroutine attackHandle;
     private void Attack()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(AttackCo());
+            if (attackHandle != null)
+                StopCoroutine(attackHandle);
+            attackHandle = StartCoroutine(AttackCo());
 
         }
     }
 
+
+    int currentAttackIndex = 0;
     IEnumerator AttackCo()
     {
         state = StateType.Attack;
-        var currentAttack = attacks[0];
+        var currentAttack = attacks[currentAttackIndex];
+        currentAttackIndex++;
+        if (currentAttackIndex == attacks.Count)
+            currentAttackIndex = 0;
         animator.Play(currentAttack.clipName);
-        yield return new WaitForSeconds(currentAttack.animationTime);
+        //currentAttack.dashSpeed
+
+        float dashEndTime = Time.time + currentAttack.dashTime;
+        float waitEndTime = Time.time + currentAttack.animationTime;
+        while(waitEndTime > Time.time)
+        {
+            if (dashEndTime > Time.time)
+                transform.Translate(currentAttack.dashSpeed * Time.deltaTime, 0, 0);
+            yield return null;
+        }
+        //yield return new WaitForSeconds(currentAttack.animationTime);
+
+
         state = StateType.IdleOrRunOrJump;
+        currentAttackIndex = 0;
     }
 
-    float moveX; 
+    float moveX;
 
     private void UpdateSprite()
     {
@@ -146,6 +170,7 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
+
         //a,d 좌우이동
         //float moveX = 0;
         moveX = 0;
