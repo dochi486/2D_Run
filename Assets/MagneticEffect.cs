@@ -41,7 +41,7 @@ public class MagneticEffect : MonoBehaviour
             //items[item.Key] = item.Value + acclerate * Time.deltaTime; 
             float accleration = item.Value + acclerate * Time.deltaTime; //누적 가속도
             items[item.Key] = accleration;
-            //items 딕셔너리를 바로 수정하는게 아니라 temp를 컬렉션으로 사용하는 foreach문이기 때문에 에러안남
+            //items 딕셔너리를 바로 수정하는게 아니라 temp를 컬렉션으로 사용하는 foreach문이기 때문에 에러안남(직접 접근이 아니라서?! )
 
             Vector2 dir = (pos - gemTr.position).normalized;
             Vector2 move = dir * accleration * Time.deltaTime;
