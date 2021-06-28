@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -47,14 +50,52 @@ public class Player : MonoBehaviour
     {
         Move();
         Jump();
+        Attack();
         UpdateSprite(); //애니메이션
 
+    }
+    StateType state = StateType.IdleOrRunOrJump;
+
+    [System.Serializable]
+    public class AttackInfo
+    {
+        public string clipName;
+        public float animationTime; //0.6f
+    }
+    public List<AttackInfo> attacks;
+    public enum StateType
+    {
+        Attack, 
+        IdleOrRunOrJump,
+
+    }
+
+    private void Attack()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(AttackCo());
+
+        }
+    }
+
+    IEnumerator AttackCo()
+    {
+        state = StateType.Attack;
+        var currentAttack = attacks[0];
+        animator.Play(currentAttack.clipName);
+        yield return new WaitForSeconds(currentAttack.animationTime);
+        state = StateType.IdleOrRunOrJump;
     }
 
     float moveX; 
 
     private void UpdateSprite()
     {
+        if (state == StateType.Attack)
+            return;
+
+
         float velocity = rigid.velocity.y;
         float absVelocity = Mathf.Abs(velocity);
 
