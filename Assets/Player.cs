@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -16,7 +15,6 @@ public class Player : MonoBehaviour
         animator.Play("Idle");
     }
 
-    // Start is called before the first frame update
     private void Awake()
     {
         instance = this;
@@ -32,58 +30,32 @@ public class Player : MonoBehaviour
 
         rigid = GetComponent<Rigidbody2D>();
         rigid.gravityScale = gravityScale;
-        cameraTr = Camera.main.transform;
-        //rayStart = transform;
-        offsetXCameraPos = cameraTr.position.x - transform.position.x;
+        ////rayStart = transform;
         //animator.Play("Run"); Idle로 시작하는 게 자연스러우니까!
 
 
     }
 
-    public Transform cameraTr;
-    public float offsetXCameraPos; //카메라랑 플레이어의 X값 차이 내 프로젝트에서는 -5! 
-    public float allowedOffsetX = 0.2f;
-    public float restoreSpeed = 40;
-    private void RestoreXPosition()
-    {
-        float offsetX = cameraTr.position.x - transform.position.x;
-        if(offsetX > offsetXCameraPos + allowedOffsetX)
-        {
-            transform.Translate(restoreSpeed * Time.deltaTime, 0, 0);
-        }
-    }
+
 
     public float speed = 20;
     public float midairVelocity = 10;
 
+    int jumpCount = 0;
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Alpha1))
-        //{
-        //    transform.Find("MagneticEffect").gameObject.SetActive(true);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha2))
-        //{
-        //    transform.Find("MagneticEffect").gameObject.SetActive(false);
-        //}
+        Move();
+        Jump();
+        UpdateSprite(); //애니메이션
 
+    }
 
-
-        if (RunGameManager.IsPlaying() == false)
-            return;
-        transform.Translate(speed * Time.deltaTime, 0, 0);
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rigid.AddForce(jumpForce);
-            //if(rigid.velocity.y > 10)
-            //{
-            //    animator.Play("Jump_Up");
-            //} 안된다ㅠㅠ
-        }
+    private void UpdateSprite()
+    {
         float velocity = rigid.velocity.y;
         float absVelocity = Mathf.Abs(velocity);
+
         string animationName = "";
         //string animationName = string.Empty; <-이걸 더 자주 쓴다
 
@@ -91,6 +63,7 @@ public class Player : MonoBehaviour
 
         if (IsGround())
         {
+            jumpCount = 0;
             animationName = "Run";
         }
         else
@@ -109,12 +82,26 @@ public class Player : MonoBehaviour
         }
 
         animator.Play(animationName);
-
-
-        RestoreXPosition();
-
     }
 
+    private void Jump()
+    {
+        if (jumpCount < 1)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                jumpCount++;
+                rigid.velocity = Vector2.zero;
+                rigid.AddForce(jumpForce);
+
+            }
+        }
+    }
+
+    private void Move()
+    {
+        transform.Translate(speed * Time.deltaTime, 0, 0);
+    }
 
     public float rayCheckDistance = 0.1f;
     public LayerMask groundLayer;
@@ -129,3 +116,4 @@ public class Player : MonoBehaviour
     }
 
 }
+

@@ -2,9 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+namespace Run
+{ 
 public class MagneticEffect : MonoBehaviour
 {
+    public static MagneticEffect instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     Dictionary<Transform, float> items = new Dictionary<Transform, float>(); 
     //자석에 붙은 transform, 가속도 float..
@@ -13,10 +20,17 @@ public class MagneticEffect : MonoBehaviour
         if (collision.transform.GetComponent<GemItem>() == null)
             return;
 
+        if (items.ContainsKey(collision.transform))
+            return;
+
         //items.Add(collision.transform, 0); //초기 가속도는 0
         //함수를 통해 딕셔너리에 넣지 않고 다른 방법으로 넣으면 중복으로 넣어도 에러가 안난다...
-         items[collision.transform] = 0;
+        items[collision.transform] = 0;
 
+    }
+    internal void RemoveItem(Transform transform)
+    {
+        items.Remove(transform);
     }
 
     public float acclerate = 1200; //초당 가속도? 
@@ -48,4 +62,6 @@ public class MagneticEffect : MonoBehaviour
             gemTr.Translate(move);
         }
     }
+}
+
 }
