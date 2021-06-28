@@ -3538,50 +3538,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
-      propertyPath: jumpForce.y
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
-      propertyPath: gravityScale
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
-      propertyPath: attacks.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
-      propertyPath: attacks.Array.data[0].clipName
-      value: Punch
-      objectReference: {fileID: 0}
-    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
-      propertyPath: attacks.Array.data[0].dashTime
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
-      propertyPath: attacks.Array.data[1].clipName
-      value: Attack
-      objectReference: {fileID: 0}
-    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
-      propertyPath: attacks.Array.data[1].dashTime
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
-      propertyPath: attacks.Array.data[0].dashSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
-      propertyPath: attacks.Array.data[1].dashSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
-      propertyPath: attacks.Array.data[0].animationTime
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5179449540401348512, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
-      propertyPath: attacks.Array.data[1].animationTime
-      value: 0.6
-      objectReference: {fileID: 0}
     - target: {fileID: 5179449540401348513, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3630,8 +3586,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5179449540087634779, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
 --- !u!1001 &8447574251188181392
 PrefabInstance:

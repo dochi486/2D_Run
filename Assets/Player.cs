@@ -65,6 +65,7 @@ public class Player : MonoBehaviour
         public float animationTime; //0.6f
         public float dashSpeed;
         public float dashTime;
+        public GameObject collider;
     }
     public List<AttackInfo> attacks;
     public enum StateType
@@ -79,7 +80,10 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (attackHandle != null)
+            {
+                currentAttack?.collider.SetActive(false);
                 StopCoroutine(attackHandle);
+            }
             attackHandle = StartCoroutine(AttackCo());
 
         }
@@ -87,19 +91,21 @@ public class Player : MonoBehaviour
 
 
     int currentAttackIndex = 0;
+    AttackInfo currentAttack;
     IEnumerator AttackCo()
     {
         state = StateType.Attack;
-        var currentAttack = attacks[currentAttackIndex];
+        currentAttack = attacks[currentAttackIndex];
         currentAttackIndex++;
         if (currentAttackIndex == attacks.Count)
             currentAttackIndex = 0;
         animator.Play(currentAttack.clipName);
+        currentAttack.collider.SetActive(true);
         //currentAttack.dashSpeed
 
         float dashEndTime = Time.time + currentAttack.dashTime;
         float waitEndTime = Time.time + currentAttack.animationTime;
-        while(waitEndTime > Time.time)
+        while (waitEndTime > Time.time)
         {
             if (dashEndTime > Time.time)
                 transform.Translate(currentAttack.dashSpeed * Time.deltaTime, 0, 0);
@@ -109,6 +115,9 @@ public class Player : MonoBehaviour
 
 
         state = StateType.IdleOrRunOrJump;
+
+        currentAttack.collider.SetActive(false);
+
         currentAttackIndex = 0;
     }
 
