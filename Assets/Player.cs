@@ -51,6 +51,8 @@ public class Player : MonoBehaviour
 
     }
 
+    float moveX; 
+
     private void UpdateSprite()
     {
         float velocity = rigid.velocity.y;
@@ -64,7 +66,10 @@ public class Player : MonoBehaviour
         if (IsGround())
         {
             jumpCount = 0;
-            animationName = "Run";
+            if (moveX == 0)
+                animationName = "Idle";
+            else
+                animationName = "Run";
         }
         else
         {
@@ -100,7 +105,31 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        transform.Translate(speed * Time.deltaTime, 0, 0);
+        //a,d 좌우이동
+        //float moveX = 0;
+        moveX = 0;
+
+        if (Input.GetKey(KeyCode.A))
+            moveX = -1;
+        if (Input.GetKey(KeyCode.D))
+            moveX = 1;
+        if (moveX != 0)
+        {
+            UpdateRotation(moveX);
+            transform.Translate(1 * speed * Time.deltaTime, 0, 0);
+            //Space.World추가 안했을 땐 회전한 상태로 오른쪽으로 갔는데 로컬축이 기본값이라서 그렇다. 
+            //플레이 상태에서 플레이어랑 스프라이트의  로컬 축 x 값 변경해봐도 계획한대로 가는데 왜 로컬축이라서 방향이 다른거지??
+
+
+        }
+    }
+
+    private void UpdateRotation(float currentMove)
+    {
+        if (currentMove == 0)
+            return;
+
+        transform.rotation = Quaternion.Euler(0, currentMove < 0 ? 180 : 0, 0);
     }
 
     public float rayCheckDistance = 0.1f;
