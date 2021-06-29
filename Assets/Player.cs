@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
         Attack,
         IdleOrRunOrJump,
         Attacked,
-
+        Die
     }
     Coroutine attackHandle;
     private void Attack()
@@ -256,11 +256,20 @@ public class Player : MonoBehaviour
 
 
             hitpoint -= monster.damage;
-
-
             StartCoroutine(HitCo());
-         
+
+            if (hitpoint <= 0)
+            {
+                StartCoroutine(DieCo());
+            }
+
         }
+    }
+    private IEnumerator DieCo()
+    {
+        yield return new WaitForSeconds(delayHit);
+        state = StateType.Die;
+        animator.Play("Die");
     }
 
     public float delayHit = 0.3f;
