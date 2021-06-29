@@ -238,7 +238,7 @@ public class Player : MonoBehaviour
     {
 
 
-        Monster monster = collision.gameObject.GetComponent<Monster>();
+        MonsterBase monster = collision.gameObject.GetComponent<MonsterBase>();
         if (monster == null || monster.hp <= 0)
             return;
 

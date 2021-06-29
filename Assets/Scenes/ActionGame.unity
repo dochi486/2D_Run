@@ -3918,8 +3918,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingEye
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 595135921617741329, guid: 1227d8cf7ca202f42ad1272cb88c7129, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1227d8cf7ca202f42ad1272cb88c7129, type: 3}
 --- !u!1001 &2854307643892651062
 PrefabInstance:

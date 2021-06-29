@@ -111,7 +111,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6024992850825206608}
-  - component: {fileID: 595135921617741329}
   - component: {fileID: 595135921617741331}
   - component: {fileID: 595135921617741332}
   - component: {fileID: 595135921617741333}
@@ -139,25 +138,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &595135921617741329
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7467969020070604328}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 444d757544e795247a593349431c5a6c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &595135921617741331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dc568dc318519a489b81272696ef1c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dieDelay: 0.3
+  destroyDelay: 0.3
 --- !u!58 &4074264348515684642
 CircleCollider2D:
   m_ObjectHideFlags: 0
