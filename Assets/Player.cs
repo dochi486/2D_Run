@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -135,7 +134,7 @@ public class Player : MonoBehaviour
 
     private void UpdateSprite()
     {
-        if (state != StateType.IdleOrRunOrJump )
+        if (state != StateType.IdleOrRunOrJump)
             return;
 
 
@@ -179,12 +178,17 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
-                jumpCount++;
-                rigid.velocity = Vector2.zero;
-                rigid.AddForce(jumpForce);
+                StartJump();
 
             }
         }
+    }
+
+    private void StartJump()
+    {
+        jumpCount++;
+        rigid.velocity = Vector2.zero;
+        rigid.AddForce(jumpForce);
     }
 
     private void Move()
@@ -238,13 +242,27 @@ public class Player : MonoBehaviour
         if (monster == null)
             return;
 
+        bool isStepped = false; //밟았을 때 true
+        if (collision.contacts[0].normal.y > 0.9f)
+            isStepped = true;
 
-        hitpoint -= monster.damage;
+        if (isStepped)
+        {
+            monster.OnDamage(1);
+            StartJump();
+        }
+        else
+        {
 
-     
-        StartCoroutine(HitCo());
-  
+
+            hitpoint -= monster.damage;
+
+
+            StartCoroutine(HitCo());
+         
+        }
     }
+
     public float delayHit = 0.3f;
     IEnumerator HitCo()
     {
