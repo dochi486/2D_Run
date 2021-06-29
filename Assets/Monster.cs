@@ -1,11 +1,51 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
-
-public class Monster : MonoBehaviour
+public class MonsterBase : MonoBehaviour
 {
-    public int hp = 10;
+    protected Animator animator;
+    public enum StateType
+    {
+        Moving,
+        Attack,
+        Attacked,
+        Die
+    }
+
+    internal int damage;
+    protected StateType state = StateType.Moving;
+
+    internal int hp = 5;
+    public void OnDamage(int damage)
+    {
+        hp -= damage;
+        GetComponentInChildren<Animator>().Play("TakeHit");
+
+        if (hp <= 0)
+        {
+            StartCoroutine(DieCo());
+        }
+    }
+
+    public float dieDelay = 0.3f;
+    public float destroyDelay = 0.3f;
+
+    IEnumerator DieCo()
+    {
+        state = StateType.Die;
+        GetComponent<Collider2D>().enabled = false;
+        var rb = GetComponent<Rigidbody2D>();
+        if (rb)
+            rb.gravityScale = 0;
+        //GetComponent<Rigidbody2D>().gravityScale = 0;
+
+        yield return new WaitForSeconds(dieDelay);
+        GetComponentInChildren<Animator>().Play("Die");
+        yield return new WaitForSeconds(destroyDelay);
+        Destroy(gameObject);
+    }
+}
+public class Monster : MonsterBase
+{
     public int range = 5;
     public float minWorldX;
     public float maxWorldX;
@@ -17,7 +57,6 @@ public class Monster : MonoBehaviour
     }
 
     DirectionType direction = DirectionType.Right;
-    StateType state = StateType.Patrol;
 
     IEnumerator Start()
     {
@@ -33,8 +72,8 @@ public class Monster : MonoBehaviour
 
             if (direction == DirectionType.Right)
             {
-               
-                if(transform.position.x > maxWorldX)
+
+                if (transform.position.x > maxWorldX)
                 {
                     direction = DirectionType.Left;
                     transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -48,47 +87,12 @@ public class Monster : MonoBehaviour
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                 }
             }
-            
+
             yield return null;
             if (state == StateType.Die)
-                yield break ; //코루틴에서 함수밖으로 나갈 때는 yield break;로 할 수있따.
+                yield break; //코루틴에서 함수밖으로 나갈 때는 yield break;로 할 수있따.
 
         }
     }
-    Animator animator;
 
-    public enum StateType
-    {
-        Patrol,
-        Attack,
-        Attacked,
-        Die
-    }
-
-    internal void OnDamage(int damage)
-    {
-        hp -= damage;
-
-            GetComponentInChildren<Animator>().Play("TakeHit");
-  
-        if(hp <= 0)
-        {
-            StartCoroutine(DieCo());
-        }
-    }
-    public float dieDelay = 0.3f;
-    public float destroyDelay = 0.6f;
-    internal int damage = 1;
-
-    IEnumerator DieCo()
-    {
-        state = StateType.Die;
-        GetComponent<Collider2D>().enabled = false;
-        GetComponent<Rigidbody2D>().gravityScale = 0;
-
-        yield return new WaitForSeconds(dieDelay);
-        GetComponentInChildren<Animator>().Play("Death");
-        yield return new WaitForSeconds(destroyDelay);
-        Destroy(gameObject);
-    }
 }

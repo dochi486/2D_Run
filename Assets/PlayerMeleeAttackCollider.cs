@@ -8,11 +8,19 @@ public class PlayerMeleeAttackCollider : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.GetComponent<Monster>()?.OnDamage(damage);
+        collision.GetComponent<MonsterBase>()?.OnDamage(damage);
+
 
         //Monster monster = collision.GetComponent<Monster>();
         //if (monster == null)
         //    return;
         //monster.OnDamage(damage);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        collision.gameObject.GetComponent<MonsterBase>()?.OnDamage(damage);
+
+    }
 }
+
