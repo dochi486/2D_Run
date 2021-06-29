@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,7 +48,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (state != StateType.Attack)
+        if (state == StateType.IdleOrRunOrJump)
         {
             Move();
             Jump();
@@ -80,6 +81,7 @@ public class Player : MonoBehaviour
     {
         Attack,
         IdleOrRunOrJump,
+        Attacked,
 
     }
     Coroutine attackHandle;
@@ -99,7 +101,7 @@ public class Player : MonoBehaviour
 
 
     int currentAttackIndex = 0;
-    AttackInfo currentAttack;
+    AttackInfo currentAttack = new AttackInfo();
     IEnumerator AttackCo()
     {
         state = StateType.Attack;
@@ -133,15 +135,15 @@ public class Player : MonoBehaviour
 
     private void UpdateSprite()
     {
-        if (state == StateType.Attack)
+        if (state != StateType.IdleOrRunOrJump )
             return;
 
 
         float velocity = rigid.velocity.y;
         float absVelocity = Mathf.Abs(velocity);
 
-        string animationName = "";
-        //string animationName = string.Empty; <-이걸 더 자주 쓴다
+        //string animationName = "";
+        string animationName = string.Empty; //< -이걸 더 자주 쓴다
 
         //float absVelocity = velocity > 0 ? velocity : -velocity;
 
@@ -227,5 +229,34 @@ public class Player : MonoBehaviour
         Gizmos.DrawRay(rayStart.position, Vector2.down * rayCheckDistance);
     }
 
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+
+        Monster monster = collision.gameObject.GetComponent<Monster>();
+        if (monster == null)
+            return;
+
+
+        hitpoint -= monster.damage;
+
+     
+        StartCoroutine(HitCo());
+  
+    }
+    public float delayHit = 0.3f;
+    IEnumerator HitCo()
+    {
+        state = StateType.Attacked;
+        animator.Play("Damage");
+
+        yield return new WaitForSeconds(delayHit);
+        state = StateType.IdleOrRunOrJump;
+    }
+
+    public int hitpoint = 5; //hp는 hitpoint의 얒ㄱ자
+    //OnTriggerEnter2D에서는 collision.GetComponent<>바로 가능했찌만
+    //OnCollisionEnter2D는 한 단계를 거쳐서 겟할 수 있다
 }
 
