@@ -239,7 +239,7 @@ public class Player : MonoBehaviour
 
 
         Monster monster = collision.gameObject.GetComponent<Monster>();
-        if (monster == null)
+        if (monster == null || monster.hp <= 0)
             return;
 
         bool isStepped = false; //밟았을 때 true

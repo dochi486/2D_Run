@@ -83,6 +83,9 @@ public class Monster : MonoBehaviour
     IEnumerator DieCo()
     {
         state = StateType.Die;
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().gravityScale = 0;
+
         yield return new WaitForSeconds(dieDelay);
         GetComponentInChildren<Animator>().Play("Death");
         yield return new WaitForSeconds(destroyDelay);
