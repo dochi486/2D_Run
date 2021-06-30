@@ -3566,7 +3566,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470661977}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -3937,11 +3937,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2138471671, guid: 40b50a497f4440b4eacf029d2d6fa0b2, type: 3}
       propertyPath: m_BodyType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2138471671, guid: 40b50a497f4440b4eacf029d2d6fa0b2, type: 3}
       propertyPath: m_Constraints
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5121000038060729659, guid: 40b50a497f4440b4eacf029d2d6fa0b2, type: 3}
       propertyPath: m_Name
@@ -3953,7 +3953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7881794045086621280, guid: 40b50a497f4440b4eacf029d2d6fa0b2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -7.26
       objectReference: {fileID: 0}
     - target: {fileID: 7881794045086621280, guid: 40b50a497f4440b4eacf029d2d6fa0b2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4010,7 +4010,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5179449540401348514, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
       propertyPath: m_CollisionDetection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5179449540401348517, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
       propertyPath: m_RootOrder
