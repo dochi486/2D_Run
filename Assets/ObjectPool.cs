@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,6 @@ public class ObjectPool : MonoBehaviour
 
     static ObjectPool instance;
     public List<PoolItemInfo> poolList = new List<PoolItemInfo>();
-    //HashSet
 
     [System.Serializable]
     public class PoolItemInfo
@@ -26,26 +26,22 @@ public class ObjectPool : MonoBehaviour
             {
                 var newItem = Object.Instantiate(original);
                 newItem.name = original.name;
-
                 InsertPoolItem(newItem);
             }
         }
         public void Push(GameObject newItem)
         {
-
             InsertPoolItem(newItem);
         }
 
         private void InsertPoolItem(GameObject newItem)
         {
-
             newItem.SetActive(false);
             newItem.transform.parent = parent;
             items.Add(newItem);
 
             if (items.Find(x => x == newItem) == null)
                 items.Add(newItem);
-
         }
 
         public GameObject Pop(GameObject original)
@@ -115,7 +111,6 @@ public class ObjectPool : MonoBehaviour
         PoolItemInfo find = poolList.Find(x => x.name == original.name);
         if (find != null)
             find.Push(original);
-
         //find?.Push(original); 위에꺼랑 똑같은 코드
         //poolList.Find(x => x.name == original.name)?.Push(original); 똑같은 코드2
 
