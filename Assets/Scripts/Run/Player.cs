@@ -15,8 +15,6 @@ namespace Run
         {
             animator.Play("Idle");
         }
-
-        // Start is called before the first frame update
         private void Awake()
         {
             instance = this;
@@ -70,7 +68,6 @@ namespace Run
             //}
 
 
-
             if (RunGameManager.IsPlaying() == false)
                 return;
             transform.Translate(speed * Time.deltaTime, 0, 0);
@@ -82,10 +79,6 @@ namespace Run
                     jumpCount++;
                     rigid.velocity = Vector2.zero;
                     rigid.AddForce(jumpForce);
-                    //if(rigid.velocity.y > 10)
-                    //{
-                    //    animator.Play("Jump_Up");
-                    //} 안된다ㅠㅠ
                 }
             }
             float velocity = rigid.velocity.y;
@@ -121,7 +114,6 @@ namespace Run
             RestoreXPosition();
 
         }
-
 
         public float rayCheckDistance = 0.1f;
         public LayerMask groundLayer;
