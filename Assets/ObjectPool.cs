@@ -95,7 +95,7 @@ public class ObjectPool : MonoBehaviour
         return newPoolItem;
     }
 
-    new public static void Destroy(GameObject obj, float t)
+    public static void Destroy(GameObject obj, float t)
     {
         instance.DestroyGo(obj, t);
     }
