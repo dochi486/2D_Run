@@ -141,7 +141,6 @@ public class Player : MonoBehaviour
         float velocity = rigid.velocity.y;
         float absVelocity = Mathf.Abs(velocity);
 
-        //string animationName = "";
         string animationName = string.Empty; //< -이걸 더 자주 쓴다
 
         //float absVelocity = velocity > 0 ? velocity : -velocity;
@@ -208,8 +207,6 @@ public class Player : MonoBehaviour
             transform.Translate(1 * speed * Time.deltaTime, 0, 0);
             //Space.World추가 안했을 땐 회전한 상태로 오른쪽으로 갔는데 로컬축이 기본값이라서 그렇다. 
             //플레이 상태에서 플레이어랑 스프라이트의  로컬 축 x 값 변경해봐도 계획한대로 가는데 왜 로컬축이라서 방향이 다른거지??
-
-
         }
     }
 

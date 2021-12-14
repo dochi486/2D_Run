@@ -51,7 +51,7 @@ public class ObjectPool : MonoBehaviour
             if (items.Count == 0)
             {
                 result = Object.Instantiate(original); //유니티에서 기본적으로 제공하는 오브젝트 생성 코드
-                result.name = original.name; //오브젝트 이름 뒤에 (clone)이 붙지 않도록 하는 것..
+                result.name = original.name; //오브젝트 이름 뒤에 (clone)이 붙지 않도록 하는 것
                                              //이름이 같아야 오브젝트 풀에 들어가는 구조이기 때문에 이름을 무조건 같게 지정해주는 것.
                 result.SetActive(true);
                 return result;
@@ -63,7 +63,7 @@ public class ObjectPool : MonoBehaviour
             //result.transform.position = original.transform.position;
             //result.transform.rotation = original.transform.rotation;
             result.transform.SetPositionAndRotation(original.transform.position, original.transform.rotation);
-            return result; //리턴하게 되면 아이템리스트가 풀에 있는 게 아니기 때문에 리무브..
+            return result; //리턴하게 되면 아이템리스트가 풀에 있는 게 아니기 때문에 리무브
         }
     }
 
@@ -72,7 +72,7 @@ public class ObjectPool : MonoBehaviour
         instance = this;
     }
 
-    public static GameObject Instantiate(GameObject go) //static으로 한 이유: 
+    public static GameObject Instantiate(GameObject go)
     {
         return instance.InstantiateGo(go);
     }
