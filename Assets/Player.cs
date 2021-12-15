@@ -34,17 +34,13 @@ public class Player : MonoBehaviour
         rigid.gravityScale = gravityScale;
         ////rayStart = transform;
         //animator.Play("Run"); Idle로 시작하는 게 자연스러우니까!
-
-
     }
-
 
 
     public float speed = 20;
     public float midairVelocity = 10;
-
     int jumpCount = 0;
-    // Update is called once per frame
+
     void Update()
     {
         if (state == StateType.IdleOrRunOrJump)
@@ -54,17 +50,8 @@ public class Player : MonoBehaviour
         }
         Attack();
         UpdateSprite(); //애니메이션
-        //dochi.dochiAge = 4;
     }
     StateType state = StateType.IdleOrRunOrJump;
-    //public class Hedgehogs
-    //{
-    //    public string dochiName;
-    //    public float dochiAge;
-    //}
-
-    //Hedgehogs dochi;
-
 
     [System.Serializable]
     public class AttackInfo
@@ -83,7 +70,9 @@ public class Player : MonoBehaviour
         Attacked,
         Die
     }
+
     Coroutine attackHandle;
+
     private void Attack()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -97,7 +86,6 @@ public class Player : MonoBehaviour
 
         }
     }
-
 
     int currentAttackIndex = 0;
     AttackInfo currentAttack = new AttackInfo();
@@ -122,11 +110,9 @@ public class Player : MonoBehaviour
         }
         //yield return new WaitForSeconds(currentAttack.animationTime);
 
-
         state = StateType.IdleOrRunOrJump;
 
         currentAttack.collider.SetActive(false);
-
         currentAttackIndex = 0;
     }
 
@@ -136,7 +122,6 @@ public class Player : MonoBehaviour
     {
         if (state != StateType.IdleOrRunOrJump)
             return;
-
 
         float velocity = rigid.velocity.y;
         float absVelocity = Mathf.Abs(velocity);

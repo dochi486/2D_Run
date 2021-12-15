@@ -24,7 +24,6 @@ namespace Run
             //items.Add(collision.transform, 0); //초기 가속도는 0
             //함수를 통해 딕셔너리에 넣지 않고 다른 방법으로 넣으면 중복으로 넣어도 에러가 안난다.
             items[collision.transform] = new RefFloat();
-
         }
         internal void RemoveItem(Transform transform)
         {

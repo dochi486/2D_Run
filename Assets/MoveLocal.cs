@@ -13,7 +13,8 @@ public class MoveLocal : MonoBehaviour
 
     private void OnEnable()
     {
-        ObjectPool.Destroy(gameObject, destroyTime); //ObjectPool에서 꺼내면 인에이블 되니까 디스트로이를 켜는 것. Awake를 하면 1번만 실행된다. 
+        ObjectPool.Destroy(gameObject, destroyTime); 
+        //ObjectPool에서 꺼내면 인에이블 되니까 디스트로이를 켜는 것. Awake를 하면 1번만 실행된다. 
         //매번 실행되어야 하는 걸 OnEnable에 넣어둬야 한다. 
     }
     void Update()

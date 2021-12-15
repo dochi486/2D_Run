@@ -113,7 +113,6 @@ public class ObjectPool : MonoBehaviour
             find.Push(original);
         //find?.Push(original); 위에꺼랑 똑같은 코드
         //poolList.Find(x => x.name == original.name)?.Push(original); 똑같은 코드2
-
     }
 }
 

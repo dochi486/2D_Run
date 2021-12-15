@@ -10,7 +10,6 @@ public class PlayerMeleeAttackCollider : MonoBehaviour
     {
         collision.GetComponent<MonsterBase>()?.OnDamage(damage);
 
-
         //Monster monster = collision.GetComponent<Monster>();
         //if (monster == null)
         //    return;
