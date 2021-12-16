@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 129775138}
   - component: {fileID: 129775137}
   m_Layer: 0
-  m_Name: sky (1)
+  m_Name: sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,7 +218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5179449540401348513, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
       propertyPath: m_Name
-      value: Player (1)
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5179449540401348514, guid: 3bc67babe5bab774386dac9e74a2018f, type: 3}
       propertyPath: m_CollisionDetection
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 1146098825}
   - component: {fileID: 1146098824}
   m_Layer: 6
-  m_Name: Grid (1)
+  m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 1165171904}
   - component: {fileID: 1165171903}
   m_Layer: 0
-  m_Name: clouds (1)
+  m_Name: clouds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -405,7 +405,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8447574252237702662, guid: 048057f2c8a7c6d428fc19a938b269cd, type: 3}
       propertyPath: m_Name
-      value: Canvas (1)
+      value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 8447574252237702666, guid: 048057f2c8a7c6d428fc19a938b269cd, type: 3}
       propertyPath: m_Pivot.x
@@ -3319,7 +3319,7 @@ GameObject:
   - component: {fileID: 1699550818}
   - component: {fileID: 1699550817}
   m_Layer: 0
-  m_Name: sea (1)
+  m_Name: sea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
