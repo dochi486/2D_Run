@@ -3473,40 +3473,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5179449541308484492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5179449541308484493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24597c2dc76b4fe418cf26c569d739d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: {x: 0, y: 3000}
-  gravityScale: 20
-  rayStart: {fileID: 5179449541290266892}
-  speed: 20
-  midairVelocity: 10
-  attacks:
-  - clipName: Punch
-    animationTime: 0.6
-    dashSpeed: 20
-    dashTime: 0.05
-    collider: {fileID: 0}
-  - clipName: Attack
-    animationTime: 0.6
-    dashSpeed: 20
-    dashTime: 0.05
-    collider: {fileID: 0}
-  rayCheckDistance: 0.1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  delayHit: 0.3
-  hitpoint: 10
 --- !u!1 &5179449541308484493
 GameObject:
   m_ObjectHideFlags: 0
@@ -3518,7 +3484,7 @@ GameObject:
   - component: {fileID: 5179449541308484489}
   - component: {fileID: 5179449541308484494}
   - component: {fileID: 5179449541308484495}
-  - component: {fileID: 5179449541308484492}
+  - component: {fileID: 5179449541308484496}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3573,3 +3539,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.74, y: 6.07}
   m_EdgeRadius: 0
+--- !u!114 &5179449541308484496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5179449541308484493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3230e10c9372f3f4681eb8b6d7f52421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: {x: 0, y: 1000}
+  gravityScale: 7
+  rayStart: {fileID: 5179449541290266892}
+  speed: 20
+  midairVelocity: 10
+  attacks: []
+  rayCheckDistance: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  delayHit: 0.3
+  hitpoint: 5

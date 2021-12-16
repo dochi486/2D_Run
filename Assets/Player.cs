@@ -83,7 +83,6 @@ public class Player : MonoBehaviour
                 StopCoroutine(attackHandle);
             }
             attackHandle = StartCoroutine(AttackCo());
-
         }
     }
 
@@ -150,7 +149,6 @@ public class Player : MonoBehaviour
             else
                 //떨어진다
                 animationName = "Jump_Fall";
-
         }
 
         animator.Play(animationName);
@@ -163,7 +161,6 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W))
             {
                 StartJump();
-
             }
         }
     }
@@ -177,7 +174,6 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-
         //a,d 좌우이동
         //float moveX = 0;
         moveX = 0;
@@ -218,8 +214,6 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-
         MonsterBase monster = collision.gameObject.GetComponent<MonsterBase>();
         if (monster == null || monster.hp <= 0)
             return;
@@ -235,8 +229,6 @@ public class Player : MonoBehaviour
         }
         else
         {
-
-
             hitpoint -= monster.damage;
             StartCoroutine(HitCo());
 
@@ -244,7 +236,6 @@ public class Player : MonoBehaviour
             {
                 StartCoroutine(DieCo());
             }
-
         }
     }
     private IEnumerator DieCo()
