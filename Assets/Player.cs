@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     public static Player instance;
     //RunGameManager runGameManager; //싱글톤 안했을 때 사용하는 방법
-    Animator animator;
+    internal Animator animator;
     Rigidbody2D rigid;
     public Vector2 jumpForce = new Vector2(0, 1000);
     public float gravityScale = 7;
@@ -48,21 +48,13 @@ public class Player : MonoBehaviour
             Move();
             Jump();
         }
-        Attack();
+        ActionPlayer.instance.Attack();
         UpdateSprite(); //애니메이션
     }
-    StateType state = StateType.IdleOrRunOrJump;
+    public StateType state = StateType.IdleOrRunOrJump;
 
     [System.Serializable]
-    public class AttackInfo
-    {
-        public string clipName;
-        public float animationTime; //0.6f
-        public float dashSpeed;
-        public float dashTime;
-        public GameObject collider;
-    }
-    public List<AttackInfo> attacks;
+
     public enum StateType
     {
         Attack,
@@ -71,49 +63,6 @@ public class Player : MonoBehaviour
         Die
     }
 
-    Coroutine attackHandle;
-
-    private void Attack()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (attackHandle != null)
-            {
-                currentAttack?.collider.SetActive(false);
-                StopCoroutine(attackHandle);
-            }
-            attackHandle = StartCoroutine(AttackCo());
-        }
-    }
-
-    int currentAttackIndex = 0;
-    AttackInfo currentAttack = new AttackInfo();
-    IEnumerator AttackCo()
-    {
-        state = StateType.Attack;
-        currentAttack = attacks[currentAttackIndex];
-        currentAttackIndex++;
-        if (currentAttackIndex == attacks.Count)
-            currentAttackIndex = 0;
-        animator.Play(currentAttack.clipName);
-        currentAttack.collider.SetActive(true);
-        //currentAttack.dashSpeed
-
-        float dashEndTime = Time.time + currentAttack.dashTime;
-        float waitEndTime = Time.time + currentAttack.animationTime;
-        while (waitEndTime > Time.time)
-        {
-            if (dashEndTime > Time.time)
-                transform.Translate(currentAttack.dashSpeed * Time.deltaTime, 0, 0);
-            yield return null;
-        }
-        //yield return new WaitForSeconds(currentAttack.animationTime);
-
-        state = StateType.IdleOrRunOrJump;
-
-        currentAttack.collider.SetActive(false);
-        currentAttackIndex = 0;
-    }
 
     float moveX;
 
@@ -165,7 +114,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void StartJump()
+    internal void StartJump()
     {
         jumpCount++;
         rigid.velocity = Vector2.zero;
@@ -211,6 +160,70 @@ public class Player : MonoBehaviour
         Gizmos.DrawRay(rayStart.position, Vector2.down * rayCheckDistance);
     }
 
+
+}
+
+public class ActionPlayer : Player
+{
+    new public static ActionPlayer instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+    public class AttackInfo
+    {
+        public string clipName;
+        public float animationTime; //0.6f
+        public float dashSpeed;
+        public float dashTime;
+        public GameObject collider;
+    }
+    public List<AttackInfo> attacks;
+
+    Coroutine attackHandle;
+
+    internal void Attack()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (attackHandle != null)
+            {
+                currentAttack?.collider.SetActive(false);
+                StopCoroutine(attackHandle);
+            }
+            attackHandle = StartCoroutine(AttackCo());
+        }
+    }
+
+    int currentAttackIndex = 0;
+    AttackInfo currentAttack = new AttackInfo();
+    IEnumerator AttackCo()
+    {
+        state = StateType.Attack;
+        currentAttack = attacks[currentAttackIndex];
+        currentAttackIndex++;
+        if (currentAttackIndex == attacks.Count)
+            currentAttackIndex = 0;
+        animator.Play(currentAttack.clipName);
+        currentAttack.collider.SetActive(true);
+        //currentAttack.dashSpeed
+
+        float dashEndTime = Time.time + currentAttack.dashTime;
+        float waitEndTime = Time.time + currentAttack.animationTime;
+        while (waitEndTime > Time.time)
+        {
+            if (dashEndTime > Time.time)
+                transform.Translate(currentAttack.dashSpeed * Time.deltaTime, 0, 0);
+            yield return null;
+        }
+        //yield return new WaitForSeconds(currentAttack.animationTime);
+
+        state = StateType.IdleOrRunOrJump;
+
+        currentAttack.collider.SetActive(false);
+        currentAttackIndex = 0;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -259,4 +272,3 @@ public class Player : MonoBehaviour
     //OnTriggerEnter2D에서는 collision.GetComponent<>바로 가능했찌만
     //OnCollisionEnter2D는 한 단계를 거쳐서 겟할 수 있다
 }
-
