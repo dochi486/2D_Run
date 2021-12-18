@@ -122,8 +122,6 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        //a,d 좌우이동
-        //float moveX = 0;
         moveX = 0;
 
         if (Input.GetKey(KeyCode.A))
