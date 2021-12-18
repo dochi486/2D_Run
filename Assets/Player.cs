@@ -48,7 +48,6 @@ public class Player : MonoBehaviour
             Move();
             Jump();
         }
-        ActionPlayer.instance.Attack();
         UpdateSprite(); //애니메이션
     }
     public StateType state = StateType.IdleOrRunOrJump;
@@ -171,6 +170,12 @@ public class ActionPlayer : Player
     {
         instance = this;
     }
+
+    private void Update()
+    {
+        Attack();
+    }
+
     public class AttackInfo
     {
         public string clipName;

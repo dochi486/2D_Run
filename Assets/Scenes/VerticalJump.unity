@@ -3556,10 +3556,8 @@ MonoBehaviour:
   rayStart: {fileID: 5179449541290266892}
   speed: 20
   midairVelocity: 10
-  attacks: []
+  state: 1
   rayCheckDistance: 0.1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
-  delayHit: 0.3
-  hitpoint: 5
+    m_Bits: 64
