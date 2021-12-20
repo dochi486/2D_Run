@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class JumpPlayer : Player
 {
+    [SerializeField] float jumpTime = 20;
 
 }
