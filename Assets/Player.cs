@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    internal void StartJump()
+    internal virtual void StartJump()
     {
         jumpCount++;
         rigid.velocity = Vector2.zero;

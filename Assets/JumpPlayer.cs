@@ -6,8 +6,9 @@ public class JumpPlayer : Player
 {
     [SerializeField] float jumpTime = 20;
 
-    internal override void Jump()
+    internal override void StartJump()
     {
-        base.Jump();
+        base.StartJump();
+
     }
 }
