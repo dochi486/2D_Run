@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     public static Player instance;
     //RunGameManager runGameManager; //싱글톤 안했을 때 사용하는 방법
     internal Animator animator;
-    Rigidbody2D rigid;
+    internal Rigidbody2D rigid;
     public Vector2 jumpForce = new Vector2(0, 1000);
     public float gravityScale = 7;
     public Transform rayStart;
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
 
     public float speed = 20;
     public float midairVelocity = 10;
-    int jumpCount = 0;
+    internal int jumpCount = 0;
 
     void Update()
     {
@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
     {
         if (jumpCount < 1)
         {
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKey(KeyCode.W))
             {
                 StartJump();
             }
@@ -115,9 +115,6 @@ public class Player : MonoBehaviour
 
     internal virtual void StartJump()
     {
-        jumpCount++;
-        rigid.velocity = Vector2.zero;
-        rigid.AddForce(jumpForce);
     }
 
     private void Move()
@@ -172,6 +169,14 @@ public class ActionPlayer : Player
     private void Update()
     {
         Attack();
+    }
+
+    internal override void StartJump()
+    {
+        base.StartJump();
+        jumpCount++;
+        rigid.velocity = Vector2.zero;
+        rigid.AddForce(jumpForce);
     }
 
     public class AttackInfo

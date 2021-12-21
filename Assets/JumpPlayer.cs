@@ -9,6 +9,8 @@ public class JumpPlayer : Player
     internal override void StartJump()
     {
         base.StartJump();
-
+        jumpTime++;
+        if (jumpTime >= 30)
+            rigid.AddForce(new Vector2(0,jumpTime));
     }
 }
