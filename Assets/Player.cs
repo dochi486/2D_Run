@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
         animator.Play(animationName);
     }
 
-    private void Jump()
+    internal virtual void Jump()
     {
         if (jumpCount < 1)
         {
