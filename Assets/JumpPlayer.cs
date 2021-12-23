@@ -10,6 +10,10 @@ public class JumpPlayer : Player
     {
         base.StartJump();
         jumpTime++;
+
+        if(Input.GetKeyUp(KeyCode.W))
+            rigid.AddForce(new Vector2(0, jumpTime));
+
         if (jumpTime >= 30)
             rigid.AddForce(new Vector2(0,jumpTime));
     }
