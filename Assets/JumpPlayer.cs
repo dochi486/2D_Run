@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class JumpPlayer : Player
@@ -9,12 +7,19 @@ public class JumpPlayer : Player
     internal override void StartJump()
     {
         base.StartJump();
-        jumpTime++;
+        jumpTime += 1;
 
-        if(Input.GetKeyUp(KeyCode.W))
-            rigid.AddForce(new Vector2(0, jumpTime));
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            JumpByValue();
+            jumpTime = 0;
+        }
+        if (jumpTime >= 1000)
+            JumpByValue();
+    }
 
-        if (jumpTime >= 30)
-            rigid.AddForce(new Vector2(0,jumpTime));
+    private void JumpByValue()
+    {
+        rigid.AddForce(new Vector2(0, jumpTime));
     }
 }
